@@ -1,0 +1,36 @@
+﻿<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+<html lang="en">
+<html>
+    <head>
+       <meta charset="utf-8">
+       <title>stats</title>
+    </head>
+  
+ <body>
+ <center>
+ <h1>Все данные: </h1>
+ <table cellspacing="7" cellpadding="15" border="2" width="80%">
+    <tr>
+       <th>Имя </th>
+       <th>Возраст </th>
+       <th>Область </th>
+       <th>Галя </th>
+       <th>Камень </th>
+       <th>Игра </th>
+    </tr>
+    {% for i in num %}
+    <tr>
+        {% for j in h%}
+        <td>{{ans[i][j]}}</td>
+        {% endfor %}
+
+    </tr>
+    {% endfor %}
+ </table>
+ <p><a href="/index">Главная страница</a></p>
+ </center>
+ </body>
+
+</html>
