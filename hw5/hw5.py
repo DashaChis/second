@@ -1,7 +1,16 @@
 import sqlite3
 import re
 from flask import Flask
-from flask import render_template, request, url_for, redirect   
+from flask import render_template, request, url_for, redirect
+
+app = Flask(__name__)
+@app.route('/')
+def index():
+    if request.args:
+        word = str(request.args['word'])
+        content, url = looking_for_freedom(word)
+        return render_template('got_it.html', amount=range(len(content)), url=url, content=content)
+    return render_template('index.html')
 
 def looking_for_freedom(word):
     word = '\'%{' + word + '%\''
@@ -14,16 +23,6 @@ def looking_for_freedom(word):
         content.append(row[1][0:200])
     return content, url
 
-app = Flask(__name__)
-@app.route('/')
-def index():
-    if request.args:
-        word = str(request.args['word'])
-        content, url = looking_for_freedom(word)
-        return render_template('got_it.html', amount=range(len(content)), url=url, content=content)
-    return render_template('index.html')
-
-
 def stuck_in_the_tables():
     with open(r'''C:\Users\Asus\Desktop\tumentoday\metadata.csv''', encoding='Windows-1251') as f:
         text = f.read()
@@ -31,16 +30,16 @@ def stuck_in_the_tables():
     conn = sqlite3.connect('tumentoday.db')
     c = conn.cursor()
     c.execute('CREATE TABLE IF NOT EXISTS data(url TEXT, author TEXT, year TEXT, content TEXT)')
-    for i in range(len(words)-1):
-        words[i] = words[i].split(';')
-        url = words[i][10]
-        author = words[i][1]
-        year = words[i][3]
-        path = str(words[i][0])
+    for a in range(len(words)-1):
+        words[a] = words[a].split(';')
+        url = words[a][10]
+        author = words[a][1]
+        year = words[a][3]
+        path = str(words[a][0])
         with open(path, encoding='utf-8') as f:
-            text = f.read()
-            text = (re.sub('@.+','', text)).replace('\t', '')
-            text = text.replace('\n', '')
+            text_plain = f.read()
+            text_plain = (re.sub('@.+','', text_plain)).replace('\t', '')
+            text_plain = text_plain.replace('\n', '')
         c = conn.cursor()
         c.execute('INSERT INTO data VALUES (?, ?, ?, ?)', (url, author, year, text))
         conn.commit()
