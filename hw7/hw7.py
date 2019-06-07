@@ -55,8 +55,6 @@ def graaph(Gr, key_word):
     nx.draw_networkx_labels(Gr, pos, font_size=6, font_family='Calibri')
     plt.axis('off') 
     plt.show()
-    pth = join('static', 'graph.png')
-    plt.savefig(pth, dpi=400)
     plt.clf()
 
 def knots(Gr):  
