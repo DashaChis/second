@@ -1,3 +1,5 @@
+#Что-то сломалось и картинок нет(
+
 import urllib.request
 import matplotlib.pyplot as plt
 import gensim
