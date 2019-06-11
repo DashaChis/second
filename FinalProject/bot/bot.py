@@ -4,7 +4,7 @@ import json
 import re
 from flask import Flask, render_template, request
 
-def wall_requst(offset):  # если кидает KeyError 'response', надо менять токен.
+def wall_requst(offset):
     token = '4e6f5f194e6f5f194e6f5f19ad4e044b6044e6f4e6f5f191290f18a063374014f7fdafe'
     version = '5.92'
     group = '-28122932'
@@ -74,7 +74,6 @@ def make_model():
     return model_1_3, model_2_4
 
 def gen_str(word, m, s2='', isWord=False, syl=9, turns=100):
-    '''turns нужен большой, чтобы генерировать подгодящий стих, но при большом turns heroku кидает'''
     t = 0
     s1 = ''
     if not isWord:  
